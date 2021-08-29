@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Control.Conexion;
+
 /**
  * Servlet implementation class Registro_paciente
  */
 @WebServlet("/Registro_paciente")
 public class Registro_paciente extends HttpServlet {
-
+	
        Conexion op = new Conexion();
      
     /**
@@ -27,7 +29,7 @@ public class Registro_paciente extends HttpServlet {
 	        try (PrintWriter out = response.getWriter()) {
 	            
 	            //vamos a obtener los parametros
-	            String nom, appat, apmat, fechanac, curp;
+	            String nom, appat, apmat, fechanac, curp,usu,pass;
 	            int tel;
 	            
 	            nom = request.getParameter("nombre_pac");
@@ -35,19 +37,21 @@ public class Registro_paciente extends HttpServlet {
 	            apmat = request.getParameter("apmat_pac");
 	            tel = Integer.parseInt(request.getParameter("tel_pac"));
 	            fechanac = request.getParameter("fechanac_pac");
-	            curp = request.getParameter(curp);
+	            curp = request.getParameter("curp");
+	            usu = request.getParameter("usu");
+	            pass = request.getParameter("pass");
 	            
 	            try{
 	                //vamos a intentar insertar los datos
 	                //si es cadena "valor1", si numerico 'valor2' o valor2
 	                
-	                String q = "insert into MPaciente "
-	                        + "(nombre_pac, appat_pac, apmat_pac, fechanac_pac, tel_pac, CURP) "
+	                String q = "INSERT INTO mpaciente "
+	                        + "(nombre_pac, appat_pac, apmat_pac, fechanac_pac, tel_pac, CURP, usu_pac, pass_pac) "
 	                        + "values "
-	                        + "('"+nom+"', '"+appat+"', '"+apmat+"', "+tel+", '"+fechanac+"', "+curp+"')";
+	                        + "('"+nom+"', '"+appat+"', '"+apmat+"', "+tel+", '"+fechanac+"', '"+curp+"', '"+usu+"','"+pass+"')";
 	                
 	                
-	                set.executeUpdate(q);
+	                
 	                System.out.println("Registro Paciente");
 	            
 	            
@@ -68,17 +72,21 @@ public class Registro_paciente extends HttpServlet {
 	                    + "<br>"
 	                    + "Fecha de nacimiento: " + fechanac
 	                    + "<br>"
-	                    + "Fecha de nacimiento: " + curp
-	                    + "<br>");
-	            out.println("<h1>Registro Exitoso</h1>"
-	                    + "<a href='index.html' >Regresar al Menu Principal</a>"
+	                    + "CURP: " + curp
 	                    + "<br>"
-	                    + "<a href='Consultar' > Consultar Tabla General de Usuarios </a>");
+	                    + "Usuario: " + usu
+	                    + "<br>"
+	                    + "Contraseña: " + pass
+	                    + "<br>"
+	                    );
+	            out.println("<h1>Registro Exitoso</h1>"
+	                    + "<a href='inicio.html' >Regresar al Menu Principal</a>"
+	                    + "<b>");
 	            out.println("</body>");
 	            out.println("</html>");
 	            
 	            }catch(Exception e){
-	                System.out.println("Error al registrar en la tabla");
+	                System.out.println("Error al registrar paciente");
 	                System.out.println(e.getMessage());
 	                System.out.println(e.getStackTrace());
 	                

@@ -7,21 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Control.Conexion;
-
 /**
- * Servlet implementation class iniciar_sesion
+ * Servlet implementation class Citas
  */
-@WebServlet("/iniciar_sesion")
-public class iniciar_sesion extends HttpServlet {
+@WebServlet("/Citas")
+public class Citas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	Conexion op = new Conexion();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public iniciar_sesion() {
+    public Citas() {
         super();
         // TODO Auto-generated constructor stub
     }
